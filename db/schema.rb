@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_143751) do
+ActiveRecord::Schema.define(version: 2018_11_01_155808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,10 +37,35 @@ ActiveRecord::Schema.define(version: 2018_11_01_143751) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "manifest_inventoryitems", force: :cascade do |t|
+    t.string "hashVal"
+    t.string "name"
+    t.string "description"
+    t.string "icon"
+    t.string "screenshot"
+    t.string "itemTypeDisplayName"
+    t.string "itemTypeAndTierDisplayName"
+    t.string "tierTypeHash"
+    t.string "recoveryBucketTypeHash"
+    t.string "isInstanceItem"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "manifest_races", force: :cascade do |t|
     t.string "hashVal"
     t.string "name"
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stats", force: :cascade do |t|
+    t.integer "manifest_inventoryitem_id"
+    t.string "hashVal"
+    t.string "value"
+    t.string "min"
+    t.string "max"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

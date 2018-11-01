@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  manifestInventoryItemId: MyString
+  hashVal: MyString
+  value: MyString
+  min: MyString
+  max: MyString
+
+two:
+  manifestInventoryItemId: MyString
+  hashVal: MyString
+  value: MyString
+  min: MyString
+  max: MyString

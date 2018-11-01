@@ -15,7 +15,7 @@
 #   description = item["displayProperties"]["description"]
 #   ManifestRace.create({hashVal: hashVal, name: name, description: description})
 # end
-
+#
 # plumbing = RestClient.get("https://destiny.plumbing/")
 # endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyGenderDefinition"]
 # response = RestClient.get(endpoint)
@@ -24,7 +24,7 @@
 #   name = item["displayProperties"]["name"]
 #   ManifestGender.create({hashVal: hashVal, name: name})
 # end
-
+#
 # plumbing = RestClient.get("https://destiny.plumbing/")
 # endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyClassDefinition"]
 # response = RestClient.get(endpoint)
@@ -35,15 +35,43 @@
 #   ManifestClass.create({hashVal: hashVal, name: name})
 # end
 
+ManifestInventoryitem.destroy_all
+
 plumbing = RestClient.get("https://destiny.plumbing/")
-endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryBucketDefinition"]
+endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryItemDefinition"]
 response = RestClient.get(endpoint)
 jsonClass = JSON.parse(response)
+
 jsonClass.each do |hashVal, item|
   name = item["displayProperties"]["name"]
   description = item["displayProperties"]["description"]
-  # rails g model ManifestInvBucket hashVal name description
-  ManifestInvBucket.create({hashVal: hashVal, name: name, description: description})
-
-
+  icon = item["displayProperties"]["icon"]
+  screenshot = item["screenshot"]
+  itemTypeDisplayName = item["itemTypeDisplayName"]
+  itemTypeAndTierDisplayName = item["itemTypeAndTierDisplayName"]
+  tierTypeHash = item["inventory"]["tierTypeHash"]
+  recoveryBucketTypeHash = item["inventory"]["recoveryBucketTypeHash"]
+  isInstanceItem = item["inventory"]["isInstanceItem"]
+  # if item["stats"]
+  #   allStats = item["stats"]["stats"]
+  # end
+  ManifestInventoryitem.create(
+    hashVal: hashVal,
+    name: name,
+    description: description,
+    icon: icon,
+    screenshot: screenshot,
+    itemTypeDisplayName: itemTypeDisplayName,
+    itemTypeAndTierDisplayName: itemTypeAndTierDisplayName,
+    tierTypeHash: tierTypeHash,
+    recoveryBucketTypeHash: recoveryBucketTypeHash,
+    isInstanceItem: isInstanceItem
+    )
+    id = ManifestInventoryitem.last.id
+    if item["stats"]
+      allStats = item["stats"]["stats"]
+      allStats.each do |hash, stat|
+        stat = Stat.create(hashVal: hash, value: stat["value"], min: stat["minimum"], max: stat["maximum"], manifest_inventoryitem_id: id)
+      end
+    end
 end
