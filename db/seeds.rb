@@ -16,11 +16,21 @@
 #   ManifestRace.create({hashVal: hashVal, name: name, description: description})
 # end
 
+# plumbing = RestClient.get("https://destiny.plumbing/")
+# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyGenderDefinition"]
+# response = RestClient.get(endpoint)
+# jsonClass = JSON.parse(response)
+# jsonClass.each do |hashVal, item|
+#   name = item["displayProperties"]["name"]
+#   ManifestGender.create({hashVal: hashVal, name: name})
+# end
+
 plumbing = RestClient.get("https://destiny.plumbing/")
-endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyGenderDefinition"]
+endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyClassDefinition"]
 response = RestClient.get(endpoint)
 jsonClass = JSON.parse(response)
 jsonClass.each do |hashVal, item|
   name = item["displayProperties"]["name"]
-  ManifestGender.create({hashVal: hashVal, name: name})
+  p name
+  ManifestClass.create({hashVal: hashVal, name: name})
 end
