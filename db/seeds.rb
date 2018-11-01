@@ -92,3 +92,14 @@
 #   description = item["displayProperties"]["description"]
 #   ManifestStat.create(hashVal: hashVal, name: name, description: description)
 # end
+
+# plumbing = RestClient.get("https://destiny.plumbing/")
+# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinySandboxPerkDefinition"]
+# response = RestClient.get(endpoint)
+# jsonClass = JSON.parse(response)
+# jsonClass.each do |hashVal, item|
+#   name = item["displayProperties"]["name"]
+#   description = item["displayProperties"]["description"]
+#   icon = item["displayProperties"]["icon"]
+#   ManifestPerk.create(hashVal: hashVal, name: name, description: description, icon: icon)
+# end
