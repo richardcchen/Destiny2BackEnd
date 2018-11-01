@@ -103,3 +103,15 @@
 #   icon = item["displayProperties"]["icon"]
 #   ManifestPerk.create(hashVal: hashVal, name: name, description: description, icon: icon)
 # end
+
+plumbing = RestClient.get("https://destiny.plumbing/")
+endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyDamageTypeDefinition"]
+response = RestClient.get(endpoint)
+jsonClass = JSON.parse(response)
+jsonClass.each do |hashVal, item|
+  name = item["displayProperties"]["name"]
+  description = item["displayProperties"]["description"]
+  icon = item["displayProperties"]["icon"]
+  icontrans = item["transparentIconPath"]
+  ManifestDamageType.create(hashVal: hashVal, name: name, description: description, icon: icon, icontrans: icontrans)
+end

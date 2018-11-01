@@ -1,0 +1,2 @@
+class ManifestDamageType < ApplicationRecord
+end
