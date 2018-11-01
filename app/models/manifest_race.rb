@@ -1,0 +1,2 @@
+class ManifestRace < ApplicationRecord
+end
