@@ -1,0 +1,2 @@
+class ManifestGender < ApplicationRecord
+end
