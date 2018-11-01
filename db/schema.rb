@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_194838) do
+ActiveRecord::Schema.define(version: 2018_11_01_195855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 2018_11_01_194838) do
   end
 
   create_table "manifest_races", force: :cascade do |t|
+    t.string "hashVal"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manifest_stats", force: :cascade do |t|
     t.string "hashVal"
     t.string "name"
     t.string "description"

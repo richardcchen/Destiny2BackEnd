@@ -82,3 +82,13 @@
 #   name = item["displayProperties"]["name"]
 #   ManifestItemTierType.create(hashVal: hashVal, name: name)
 # end
+
+# plumbing = RestClient.get("https://destiny.plumbing/")
+# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyStatDefinition"]
+# response = RestClient.get(endpoint)
+# jsonClass = JSON.parse(response)
+# jsonClass.each do |hashVal, item|
+#   name = item["displayProperties"]["name"]
+#   description = item["displayProperties"]["description"]
+#   ManifestStat.create(hashVal: hashVal, name: name, description: description)
+# end

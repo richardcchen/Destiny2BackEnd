@@ -1,0 +1,2 @@
+class ManifestStat < ApplicationRecord
+end
