@@ -1,0 +1,2 @@
+class ManifestItemTierType < ApplicationRecord
+end
