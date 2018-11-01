@@ -1,0 +1,2 @@
+class ManifestInvBucket < ApplicationRecord
+end

@@ -25,12 +25,25 @@
 #   ManifestGender.create({hashVal: hashVal, name: name})
 # end
 
+# plumbing = RestClient.get("https://destiny.plumbing/")
+# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyClassDefinition"]
+# response = RestClient.get(endpoint)
+# jsonClass = JSON.parse(response)
+# jsonClass.each do |hashVal, item|
+#   name = item["displayProperties"]["name"]
+#   p name
+#   ManifestClass.create({hashVal: hashVal, name: name})
+# end
+
 plumbing = RestClient.get("https://destiny.plumbing/")
-endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyClassDefinition"]
+endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryBucketDefinition"]
 response = RestClient.get(endpoint)
 jsonClass = JSON.parse(response)
 jsonClass.each do |hashVal, item|
   name = item["displayProperties"]["name"]
-  p name
-  ManifestClass.create({hashVal: hashVal, name: name})
+  description = item["displayProperties"]["description"]
+  # rails g model ManifestInvBucket hashVal name description
+  ManifestInvBucket.create({hashVal: hashVal, name: name, description: description})
+
+
 end
