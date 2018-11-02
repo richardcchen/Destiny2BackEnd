@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  displayName: MyString
+  membershipId: MyString
+  charId1: MyString
+  charId2: MyString
+  charId3: MyString
+  membershipType: MyString
+
+two:
+  displayName: MyString
+  membershipId: MyString
+  charId1: MyString
+  charId2: MyString
+  charId3: MyString
+  membershipType: MyString

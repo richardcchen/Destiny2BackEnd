@@ -15,6 +15,14 @@ Rails.application.routes.draw do
         resources :stats, only: [:index]
         resources :itemstats, only: [:index]
       end
+      post '/users/login', to: 'users#login'
+
     end
   end
 end
+
+# post '/user/login', to: 'users#login'
+# post '/user/signup', to: 'users#signup'
+#
+# post '/videos/like', to: 'videos#like'
+# get '/videos/:id/likes', to: 'videos#likes'

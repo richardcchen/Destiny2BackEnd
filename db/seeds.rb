@@ -139,15 +139,15 @@
 # end
 # p 'done with damage type'
 
-ManifestInvBucket.destroy_all
-p 'seeding inv bucket type'
-plumbing = RestClient.get("https://destiny.plumbing/")
-endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryBucketDefinition"]
-response = RestClient.get(endpoint)
-jsonClass = JSON.parse(response)
-jsonClass.each do |hashVal, item|
-  name = item["displayProperties"]["name"]
-  description = item["displayProperties"]["description"]
-  ManifestInvBucket.create(hashVal: hashVal, name: name, description: description)
-end
-p 'done with inv bucket type'
+# ManifestInvBucket.destroy_all
+# p 'seeding inv bucket type'
+# plumbing = RestClient.get("https://destiny.plumbing/")
+# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryBucketDefinition"]
+# response = RestClient.get(endpoint)
+# jsonClass = JSON.parse(response)
+# jsonClass.each do |hashVal, item|
+#   name = item["displayProperties"]["name"]
+#   description = item["displayProperties"]["description"]
+#   ManifestInvBucket.create(hashVal: hashVal, name: name, description: description)
+# end
+# p 'done with inv bucket type'
