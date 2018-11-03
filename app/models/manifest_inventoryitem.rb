@@ -1,3 +1,3 @@
 class ManifestInventoryitem < ApplicationRecord
-  has_many :stats
+  has_many :statsMa
 end

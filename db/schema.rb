@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_174639) do
+ActiveRecord::Schema.define(version: 2018_11_02_200211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string "itemHash"
+    t.string "itemInstanceId"
+    t.string "bucketHash"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "manifest_classes", force: :cascade do |t|
     t.string "hashVal"
@@ -100,6 +108,13 @@ ActiveRecord::Schema.define(version: 2018_11_02_174639) do
     t.string "value"
     t.string "min"
     t.string "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_items", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
