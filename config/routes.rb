@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :itemstats, only: [:index]
       end
       get '/users/login', to: 'users#login'
+      get '/users/loginAuth', to: 'users#loginAuth'
       get '/users/token', to: 'users#token'
       post '/users/login', to: 'users#login'
       post 'items/getItems', to: 'items#getItems'

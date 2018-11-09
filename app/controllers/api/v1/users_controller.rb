@@ -4,6 +4,24 @@
 
 class Api::V1::UsersController < ApplicationController
   def login
+    @userObj = params[:userObj]
+    displayName = @userObj["userInfo"]["displayName"]
+    membershipId = @userObj["userInfo"]["membershipId"]
+    membershipType = @userObj["userInfo"]["membershipType"]
+    charId1 = @userObj["characterIds"][0]
+    charId2 = @userObj["characterIds"][1]
+    charId3 = @userObj["characterIds"][2]
+    User.create_with(
+      displayName: displayName,
+      membershipId: membershipId,
+      membershipType: membershipType,
+      charId1: charId1,
+      charId2: charId2,
+      charId3: charId3
+    ).find_or_create_by(membershipId: membershipId)
+  end
+
+  def loginAuth
     redirect_to "https://www.bungie.net/en/OAuth/Authorize?client_id=25336&response_type=code"
   end
 
