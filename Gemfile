@@ -16,8 +16,6 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'json'
-gem 'bungie_client'
-gem 'omniauth-bungie-oauth2'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

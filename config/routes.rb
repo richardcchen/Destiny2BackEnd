@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       post '/users/login', to: 'users#login'
       post 'items/getItems', to: 'items#getItems'
       get 'users/receivedToken', to: 'users#receivedToken'
+      post 'users/addFriend', to: 'users#addFriend'
+      post 'users/getFriends', to:'users#getFriends'
     end
   end
 end

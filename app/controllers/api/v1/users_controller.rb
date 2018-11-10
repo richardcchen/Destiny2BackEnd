@@ -48,10 +48,33 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def receivedToken
-    byebug
     render json: {data: @code}
   end
 
+  def addFriend
+    userMembershipId = params[:userObj]["userInfo"]["membershipId"]
+    friendId = params[:friendObj]["userInfo"]["membershipId"]
+    friendSystem = params[:friendObj]["userInfo"]["membershipType"]
+    displayName = params[:friendObj]["userInfo"]["displayName"]
+    userId = User.find_by(membershipId: userMembershipId).id
+    if Friend.exists?(membershipId: friendId, user_id: userId)
+      puts "Already a Friend!"
+    else
+      Friend.create(
+        user_id: userId,
+        displayName: displayName,
+        membershipId: friendId,
+        system: friendSystem)
+    end
+  end
+
+    def getFriends
+      id = params[:userObj]["userInfo"]["membershipId"]
+      friends = User.find_by(membershipId: id).friends
+      render json: {data: friends}
+    end
+
+    # params[:"userObj"]["userInfo"]["membershipId"]
 
   private
   def user_params
@@ -60,18 +83,3 @@ class Api::V1::UsersController < ApplicationController
 
 
 end
-
-
-
-
-
-#   def login
-#   @user = User.find_by(user_params)
-#   # byebug
-#   if !@user
-#     @user = {username: ""}
-#   else
-#     @videos = @user.videos
-#   end
-#   render json: {user: @user, videos: @videos}, status: :ok
-# end
