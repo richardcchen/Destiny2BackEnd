@@ -28,7 +28,6 @@ class Api::V1::UsersController < ApplicationController
 
   def token
     @code = params[:code]
-    @client_id = "25336"
     @apiKey = Rails.application.credentials.api_key
     @client_id = Rails.application.credentials.client_id
     @secret = Rails.application.credentials.client_secret
