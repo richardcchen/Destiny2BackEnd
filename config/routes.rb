@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get '/users/token', to: 'users#token'
       post '/users/login', to: 'users#login'
       post 'items/getItems', to: 'items#getItems'
+      post 'items/getVault', to: 'items#getVault'
       get 'users/receivedToken', to: 'users#receivedToken'
       post 'users/addFriend', to: 'users#addFriend'
       post 'users/getFriends', to:'users#getFriends'

@@ -12,7 +12,6 @@ class Item < ApplicationRecord
   end
 
   def self.getAllItems(paramsObj, id, system)
-    # byebug
     finalObj = paramsObj.map do |eachObj|
       self.getItemInfo(eachObj[:itemHash], eachObj[:bucketHash], eachObj[:itemInstanceId], id, system)
     end
@@ -45,20 +44,39 @@ class Item < ApplicationRecord
   end
 
   def self.itemFilter(items)
-    itemFilter = ["Chest Armor", "Leg Armor"]
+    # itemFilter = ["Chest Armor", "Leg Armor", "Power Weapons", "Kinetic Weapons", "Class Armor", "Vehicle", "Energy Weapons", "Emote", "Helmet", "Gauntlets", "Ghost"]
+    itemFilter = ["14239492", "20886954", "953998645", "1498876634", "1585787867", "2025709351", "2465295065", "3054419239", "3448274439", "3551918588", "4023194814"]
     filteredArray = []
     items.each do |item|
-      itemBucketName = ManifestInvBucket.find_by(hashVal: item["bucketHash"]).name
-      if (itemFilter.include?(itemBucketName))
+      if (itemFilter.include?(item["bucketHash"].to_s))
         filteredArray.push(item)
       end
     end
-    byebug
+    filteredArray
   end
 
-  # jsonClass.each do |hashVal, item|
-  #   name = item["displayProperties"]["name"]
-  #   ManifestGender.create({hashVal: hashVal, name: name})
-  # end
+  def self.getVault(items, id, system)
+    itemsFilter = ["2973005342", "3313201758", "1469714392"]
+    filteredArray = []
+    items.each do |item|
+      if (!itemsFilter.include?(item["bucketHash"].to_s))
+        filteredArray.push(item)
+        # byebug
+      end
+    end
+    finalObj = filteredArray.map do |eachObj|
+      self.getVaultItemInfo(eachObj[:itemHash], eachObj[:bucketHash], eachObj[:itemInstanceId], id, system)
+    end
+    finalObj
+  end
 
-end
+  def self.getVaultItemInfo(itemHash, bucketHash, itemInstanceId, id, system)
+    invObj = ManifestInventoryitem.find_by(hashVal: itemHash)
+    bucketObj  = ManifestInvBucket.find_by(hashVal: bucketHash)
+    instanceObj = {instanceId: itemInstanceId}
+    newObj = {invObj: invObj, bucketObj: bucketObj, instanceObj: instanceObj}
+    newObj
+  end
+
+
+end #end of class
