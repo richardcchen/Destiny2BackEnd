@@ -45,10 +45,20 @@ class Item < ApplicationRecord
   end
 
   def self.itemFilter(items)
-    byebug
     itemFilter = ["Chest Armor", "Leg Armor"]
-    # bucketHash = items[0]["bucketHash"]
+    filteredArray = []
+    items.each do |item|
+      itemBucketName = ManifestInvBucket.find_by(hashVal: item["bucketHash"]).name
+      if (itemFilter.include?(itemBucketName))
+        filteredArray.push(item)
+      end
+    end
+    byebug
   end
 
+  # jsonClass.each do |hashVal, item|
+  #   name = item["displayProperties"]["name"]
+  #   ManifestGender.create({hashVal: hashVal, name: name})
+  # end
 
 end
