@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       get 'users/receivedToken', to: 'users#receivedToken'
       post 'users/addFriend', to: 'users#addFriend'
       post 'users/getFriends', to:'users#getFriends'
+      post 'items/leaveComment', to: 'items#leaveComment'
+      post 'users/feed', to: 'users#feed'
     end
   end
 end

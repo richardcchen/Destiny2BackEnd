@@ -67,13 +67,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-    def getFriends
-      id = params[:userObj]["userInfo"]["membershipId"]
-      friends = User.find_by(membershipId: id).friends
-      render json: {data: friends}
-    end
+  def getFriends
+    id = params[:userObj]["userInfo"]["membershipId"]
+    friends = User.find_by(membershipId: id).friends
+    render json: {data: friends}
+  end
 
-    # params[:"userObj"]["userInfo"]["membershipId"]
+  def feed
+    id = params["id"]
+    comments = User.find_by(membershipId: id).comments
+    render json: {data: comments}
+
+  end
+
 
   private
   def user_params
