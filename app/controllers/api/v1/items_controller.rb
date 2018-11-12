@@ -26,10 +26,11 @@ class Api::V1::ItemsController < ApplicationController
     userMembershipId = owner["userInfo"]["membershipId"]
     itemName = itemObj["invObj"]["name"]
     itemUrl = "http://www.bungie.net#{itemObj["invObj"]["screenshot"]}"
+    iconUrl = "http://www.bungie.net#{itemObj["invObj"]["icon"]}"
     itemType = itemObj["invObj"]["itemTypeAndTierDisplayName"]
     commenterId = User.find_by("membershipId": commenterMemberShipId).id
     userId = User.find_by("membershipId": userMembershipId).id
     commenterName = User.find_by("membershipId": commenterMemberShipId).displayName
-    Comment.create(user_id: userId, commenter_id: commenterId, itemName: itemName, itemUrl: itemUrl, itemType: itemType, commenterName: commenterName, comment: comment)
+    Comment.create(user_id: userId, commenter_id: commenterId, itemName: itemName, itemUrl: itemUrl, itemType: itemType, commenterName: commenterName, comment: comment, iconUrl: iconUrl)
   end
 end
