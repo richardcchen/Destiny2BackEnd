@@ -25,6 +25,16 @@ class Api::V1::UsersController < ApplicationController
     redirect_to "https://www.bungie.net/en/OAuth/Authorize?client_id=25336&response_type=code"
   end
 
+  def createuser
+    User.create(
+      displayName: params["username"],
+      membershipId: params["newUserId"],
+      membershipType: params["system"],
+      charId1: params["newUserCharArray"][0],
+      charId2: params["newUserCharArray"][1],
+      charId3: params["newUserCharArray"][2]    
+    )
+  end
 
   def token
     @code = params[:code]
@@ -77,6 +87,18 @@ class Api::V1::UsersController < ApplicationController
     id = params["id"]
     comments = User.find_by(membershipId: id).comments
     render json: {data: comments}
+  end
+
+  def checkuser
+    username = params["username"]
+    check = User.find_by("displayName": username)
+    if check != nil
+      result = "fail"
+      render json: {data: result}
+    else
+      result = "pass"
+      render json: {data: result}
+    end
 
   end
 

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       post 'users/getFriends', to:'users#getFriends'
       post 'items/leaveComment', to: 'items#leaveComment'
       post 'users/feed', to: 'users#feed'
+      post 'users/checkuser', to: 'users#checkuser'
+      post 'users/createuser', to: 'users#createuser'
     end
   end
 end
