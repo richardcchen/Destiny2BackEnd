@@ -5,20 +5,9 @@
 class Api::V1::UsersController < ApplicationController
   def login
     @userObj = params[:userObj]
-    displayName = @userObj["userInfo"]["displayName"]
+
     membershipId = @userObj["userInfo"]["membershipId"]
-    membershipType = @userObj["userInfo"]["membershipType"]
-    charId1 = @userObj["characterIds"][0]
-    charId2 = @userObj["characterIds"][1]
-    charId3 = @userObj["characterIds"][2]
-    User.create_with(
-      displayName: displayName,
-      membershipId: membershipId,
-      membershipType: membershipType,
-      charId1: charId1,
-      charId2: charId2,
-      charId3: charId3
-    ).find_or_create_by(membershipId: membershipId)
+    user = User.find_by(membershipId: membershipId)
   end
 
   def loginAuth
@@ -32,7 +21,9 @@ class Api::V1::UsersController < ApplicationController
       membershipType: params["system"],
       charId1: params["newUserCharArray"][0],
       charId2: params["newUserCharArray"][1],
-      charId3: params["newUserCharArray"][2]    
+      charId3: params["newUserCharArray"][2],
+      password: params["pw"]
+
     )
   end
 
@@ -91,10 +82,17 @@ class Api::V1::UsersController < ApplicationController
 
   def checkuser
     username = params["username"]
+    pw = params["pw"]
     check = User.find_by("displayName": username)
     if check != nil
       result = "fail"
-      render json: {data: result}
+      if check.password == pw
+        pw = "pass"
+        render json: {data: result, password: pw}
+      else
+        pw = "fail"
+        render json: {data: result, password: pw}
+      end
     else
       result = "pass"
       render json: {data: result}
