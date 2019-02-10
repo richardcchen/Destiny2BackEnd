@@ -45,7 +45,7 @@ class Item < ApplicationRecord
 
   def self.itemFilter(items)
     # itemFilter = ["Chest Armor", "Leg Armor", "Power Weapons", "Kinetic Weapons", "Class Armor", "Vehicle", "Energy Weapons", "Emote", "Helmet", "Gauntlets", "Ghost"]
-    itemFilter = ["14239492", "20886954", "953998645", "1498876634", "1585787867", "2025709351", "2465295065", "3054419239", "3448274439", "3551918588", "4023194814"]
+    itemFilter = ["14239492", "20886954", "953998645", "1498876634", "1585787867", "2465295065", "3054419239", "3448274439", "3551918588", "4023194814"]
     filteredArray = []
     items.each do |item|
       if (itemFilter.include?(item["bucketHash"].to_s))
