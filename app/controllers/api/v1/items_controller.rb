@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
-
+  #getting items
   def getItems
     items = params[:items]
     id = params[:id]
@@ -33,4 +33,4 @@ class Api::V1::ItemsController < ApplicationController
     commenterName = User.find_by("membershipId": commenterMemberShipId).displayName
     Comment.create(user_id: userId, commenter_id: commenterId, itemName: itemName, itemUrl: itemUrl, itemType: itemType, commenterName: commenterName, comment: comment, iconUrl: iconUrl)
   end
-end
+end #end of class
