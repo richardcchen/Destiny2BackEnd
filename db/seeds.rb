@@ -46,44 +46,44 @@ end
 p "done with class"
 
 
-# p "seeding inventory item and stats"
-# ManifestInventoryitem.destroy_all
-# Stat.destroy_all
-# plumbing = RestClient.get("https://destiny.plumbing/")
-# endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryItemDefinition"]
-# response = RestClient.get(endpoint)
-# jsonClass = JSON.parse(response)
-#
-# jsonClass.each do |hashVal, item|
-#   name = item["displayProperties"]["name"]
-#   description = item["displayProperties"]["description"]
-#   icon = item["displayProperties"]["icon"]
-#   screenshot = item["screenshot"]
-#   itemTypeDisplayName = item["itemTypeDisplayName"]
-#   itemTypeAndTierDisplayName = item["itemTypeAndTierDisplayName"]
-#   tierTypeHash = item["inventory"]["tierTypeHash"]
-#   recoveryBucketTypeHash = item["inventory"]["recoveryBucketTypeHash"]
-#   isInstanceItem = item["inventory"]["isInstanceItem"]
-#   ManifestInventoryitem.create(
-#     hashVal: hashVal,
-#     name: name,
-#     description: description,
-#     icon: icon,
-#     screenshot: screenshot,
-#     itemTypeDisplayName: itemTypeDisplayName,
-#     itemTypeAndTierDisplayName: itemTypeAndTierDisplayName,
-#     tierTypeHash: tierTypeHash,
-#     recoveryBucketTypeHash: recoveryBucketTypeHash,
-#     isInstanceItem: isInstanceItem
-#     )
-#     id = ManifestInventoryitem.last.id
-#     if item["stats"]
-#       allStats = item["stats"]["stats"]
-#       allStats.each do |hash, stat|
-#         stat = Stat.create(hashVal: hash, value: stat["value"], min: stat["minimum"], max: stat["maximum"], manifest_inventoryitem_id: id)
-#       end
-#     end
-# end
+p "seeding inventory item and stats"
+ManifestInventoryitem.destroy_all
+Stat.destroy_all
+plumbing = RestClient.get("https://destiny.plumbing/")
+endpoint = JSON.parse(plumbing)["en"]["raw"]["DestinyInventoryItemDefinition"]
+response = RestClient.get(endpoint)
+jsonClass = JSON.parse(response)
+
+jsonClass.each do |hashVal, item|
+  name = item["displayProperties"]["name"]
+  description = item["displayProperties"]["description"]
+  icon = item["displayProperties"]["icon"]
+  screenshot = item["screenshot"]
+  itemTypeDisplayName = item["itemTypeDisplayName"]
+  itemTypeAndTierDisplayName = item["itemTypeAndTierDisplayName"]
+  tierTypeHash = item["inventory"]["tierTypeHash"]
+  recoveryBucketTypeHash = item["inventory"]["recoveryBucketTypeHash"]
+  isInstanceItem = item["inventory"]["isInstanceItem"]
+  ManifestInventoryitem.create(
+    hashVal: hashVal,
+    name: name,
+    description: description,
+    icon: icon,
+    screenshot: screenshot,
+    itemTypeDisplayName: itemTypeDisplayName,
+    itemTypeAndTierDisplayName: itemTypeAndTierDisplayName,
+    tierTypeHash: tierTypeHash,
+    recoveryBucketTypeHash: recoveryBucketTypeHash,
+    isInstanceItem: isInstanceItem
+    )
+    id = ManifestInventoryitem.last.id
+    if item["stats"]
+      allStats = item["stats"]["stats"]
+      allStats.each do |hash, stat|
+        stat = Stat.create(hashVal: hash, value: stat["value"], min: stat["minimum"], max: stat["maximum"], manifest_inventoryitem_id: id)
+      end
+    end
+end
 
 ManifestItemTierType.destroy_all
 p "seeing item tier type definition"
