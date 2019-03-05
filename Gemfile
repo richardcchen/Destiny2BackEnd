@@ -47,3 +47,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'active_model-serializers'
 gem 'rest-client'
+
+#adding ddtrace
+source 'https://rubygems.org'
+gem 'ddtrace'
