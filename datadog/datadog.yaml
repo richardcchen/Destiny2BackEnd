@@ -1,0 +1,4 @@
+apm_config:
+  enabled: true
+  analyzed_spans:
+    destinybe|rack.request: 1
