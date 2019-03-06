@@ -7,3 +7,7 @@ instances:
     password: 1330aad749f118c0623bb68a9783a29c674928b0c0da66d7bc28352717f12eb1
     dbname: d8ffc9d7qhqbhp
     ssl: false
+
+apm_config:
+  analyzed_spans:
+    destinybe|rack.request: 1
