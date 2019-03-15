@@ -35,7 +35,6 @@ class Api::V1::UsersController < ApplicationController
 
   url = 'https://www.bungie.net/en/OAuth/Authorize/'
   # url = 'https://www.bungie.net/platform/app/oauth/token/'
-
   body = {grant_type: 'authorization_code', code: @code,
     client_id: @client_id, client_secret: @secret
   }
@@ -83,10 +82,11 @@ class Api::V1::UsersController < ApplicationController
   def checkuser
     username = params["username"]
     pw = params["pw"]
+    membershipType = params["system"]
     check = User.find_by("displayName": username)
     if check != nil
       result = "fail"
-      if check.password == pw
+      if (check.password == pw) && (check.membershipType == membershipType)
         pw = "pass"
         render json: {data: result, password: pw}
       else
@@ -97,7 +97,6 @@ class Api::V1::UsersController < ApplicationController
       result = "pass"
       render json: {data: result}
     end
-
   end
 
 
