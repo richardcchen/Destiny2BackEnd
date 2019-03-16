@@ -99,11 +99,22 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def createCheckUser
+    username = params["username"]
+    check = User.find_by("displayName": username)
+    if check != nil
+      result = "fail"
+      render json: {data: result}
+    else
+      result = "pass"
+      render json: {data: result}
+    end
+  end
+
 
   private
   def user_params
     params.require(:user).permit(:membershipId, :membershipType, :charId1, :charId2, :charId3, :displayName)
   end
 
-
-end
+end #end of class

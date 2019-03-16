@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post 'users/feed', to: 'users#feed'
       post 'users/checkuser', to: 'users#checkuser'
       post 'users/createuser', to: 'users#createuser'
+      post 'users/checkcreate', to: 'users#createCheckUser'
     end
   end
 end
